@@ -9,5 +9,5 @@ Au programme :
   - Un agenda qui vous permettra de programmer vos repas et vos séances de sport.
   - Un moyen de consulter le nutriscore et la composition des produits que vous achetez.
   - Des suggestions de repas avec recette.
-  - Une compilation mensuel de vos progrès. 
+  - Une compilation mensuelle de vos progrès. 
   - ...
