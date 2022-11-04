@@ -16,5 +16,5 @@ Au programme :
 
 # Set-up base de données
 
-Pour stocker les données, nous utilisons une base de données HyperSQL. Vous trouverez les fichiers necessaires à sa mise en place.
-Pour lancer le serveur de BD, utilisez placez vous dans le répertoire HSQLDB et tapez la commande suivante : java -cp hsqldb.jar org.hsqldb.Server --database Healthylife
+Pour stocker les données, nous utilisons une base de données HyperSQL. Vous trouverez les fichiers necessaires à sa mise en place à la source du projet.
+Pour lancer le serveur de BD, placez vous dans le répertoire HSQLDB et tapez la commande suivante : java -cp hsqldb.jar org.hsqldb.Server --database Healthylife
