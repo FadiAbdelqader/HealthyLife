@@ -1,60 +1,19 @@
-buildscript {
-    dependencies {
-        classpath 'org.apache.maven:maven-core:3.8.6'
-        classpath 'org.apache.maven.reporting:maven-reporting-api:3.1.1'
-        classpath 'org.jacoco:jacoco-maven-plugin:0.8.8'
-        classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.12.0'
-        classpath "com.cosminpolifronie.gradle:gradle-plantuml-plugin:1.6.0"
-    }
-    repositories {
-        mavenCentral()
-        maven {
-            url 'https://plugins.gradle.org/m2/'
-        }
-    }
-}
-
-
-    id 'org.asciidoctor.jvm.pdf' version '3.1.0'
-    id 'org.asciidoctor.jvm.gems' version '3.1.0'
-    id 'org.springframework.boot' version '2.7.5'
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java'
-
-
-apply plugin: 'application'
-apply plugin: 'jacoco'
-apply plugin: 'org.sonarqube'
-apply plugin: 'com.github.kt3k.coveralls'
-apply plugin: "com.cosminpolifronie.gradle.plantuml"
-apply plugin: VersionPlugin
-
-
+}
 
 group = 'com.devops'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
-// plugin to get the version of the project
-// from https://stackoverflow.com/questions/13198358/how-to-get-project-version-in-custom-gradle-plugin
-// uses version in build.gradle file
-class VersionPlugin implements Plugin<Project> {
-    public void apply(Project project) {
-        project.task('version') {
-            project.gradle.projectsEvaluated {
-                println "$project.version"
-            }
-        }
-    }
+repositories {
+	mavenCentral()
 }
 
 dependencies {
-    testImplementation "org.testng:testng:7.3.0"
-    implementation "org.apache.logging.log4j:log4j-api:2.5"
-    implementation "org.apache.logging.log4j:log4j-core:2.5"
-    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.5.0"
-    asciidoctorGems 'rubygems:rouge:3.15.0'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -62,95 +21,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-repositories {
-    mavenCentral()
-}
-
-mainClassName = 'com.devops.HealthyLife.HealthyLifeApplication'
-
-defaultTasks 'run'
-
-jar {
-    manifest {
-        attributes 'Main-Class': mainClassName
-    }
-}
-
-test {
-    useTestNG()
-    include '**'
-}
-
-jacoco {
-  toolVersion = '0.8.8'
-  reportsDirectory = file("${buildDir}/reports/jacoco") // this is the default
-}
-
-jacocoTestReport {
-    reports {
-        xml.required = true // coveralls plugin depends on xml format report
-        html.required = true
-        html.destination = file("${buildDir}/jacocoHtml")
-    }
-}
-
-coveralls {
-    jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
-}
-
-
-// Added to send coverage information to codacy
-// see https://github.com/codacy/codacy-coverage-reporter
-configurations { codacy }
-repositories {
-    maven { url "https://jitpack.io" }
-    maven { url "https://dl.bintray.com/typesafe/maven-releases" }
-}
-dependencies {
-    codacy 'com.github.codacy:codacy-coverage-reporter:-SNAPSHOT'
-}
-task sendCoverageToCodacy(type: JavaExec, dependsOn: jacocoTestReport) {
-    mainClass = "com.codacy.CodacyCoverageReporter"
-    classpath = configurations.codacy
-    args = [
-            "report",
-            "-l",
-            "Java",
-            "-r",
-            "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
-    ]
-}
-
-
-asciidoctorPdf {
-  dependsOn asciidoctorGemsPrepare
-
-  baseDirFollowsSourceFile()
-
-  asciidoctorj {
-    requires 'rouge'
-    modules {
-      diagram.use()
-    }
-    attributes 'build-gradle': file('build.gradle'),
-        'sourcedir': project.sourceSets.main.java.srcDirs[0],
-        'endpoint-url': 'http://example.org',
-        'source-highlighter': 'rouge',
-        'rouge-style': 'github',
-        'rouge-theme': 'github',
-        'imagesdir': './images',
-        'toc': 'left',
-        'toclevels': 2,
-        'icons': 'font',
-        'idprefix': '',
-        'idseparator': '-'
-  }
-}
-
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-
-task asciidoctor(dependsOn: asciidoctorPdf)
-
