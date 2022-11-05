@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Repas {
+Date date
+Time heure
+String nomRepas
+lister_entrees()
+lister_plats()
+lister_desserts()
+lister_collations()
+calcul_calories()
+ajouter_repas_agenda()
+enlever_repas_agenda()
+}
+class Date {
+}
+class Heure {
+}
+
+class SeanceSport {
+String sport
+boolean isSeanceCompletee
+lister_sports()
+ajouter_seance()
+completer_seance()
+}
+
+@enduml
