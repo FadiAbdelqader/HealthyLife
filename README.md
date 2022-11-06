@@ -2,8 +2,7 @@
 
 ![CircleCI](https://img.shields.io/circleci/build/github/FadiAbdelqader/HealthyLife?style=flat) (https://app.circleci.com/pipelines/github/FadiAbdelqader/HealthyLife) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/1d5b6a1121dd402fbb371c7f5d296d11)](https://www.codacy.com/gh/FadiAbdelqader/HealthyLife/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=FadiAbdelqader/HealthyLife&amp;utm_campaign=Badge_Grade) 
 
-[![CircleCI](https://circleci.com/gh/FadiAbdelqader/HealthyLife.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
-
+[![CircleCI](https://circleci.com/gh/FadiAbdelqader/HealthyLife.svg?style=svg)](https://app.circleci.com/pipelines/github/FadiAbdelqader/HealthyLife)
 #
 
 Healthylife, l'application qui vous permettra d'améliorer votre quotidien ! Que vous souhaitiez perdre du poids, en gagner, vous maintenir ou simplement faire attention à votre santé, Healthylife saura vous seduire !
