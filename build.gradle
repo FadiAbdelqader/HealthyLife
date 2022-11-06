@@ -7,6 +7,16 @@ plugins {
 
 apply plugin: VersionPlugin
 
+class VersionPlugin implements Plugin<Project> {
+    public void apply(Project project) {
+        project.task('version') {
+            project.gradle.projectsEvaluated {
+                println "$project.version"
+            }
+        }
+    }
+}
+
 group = 'com.devops'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
