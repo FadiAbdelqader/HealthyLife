@@ -5,4 +5,8 @@ public class Collation extends ComposantRepas {
 	public Collation(String nom) {
 		super(nom);
 	}
+	
+	public Collation() {
+		super();
+	}
 }

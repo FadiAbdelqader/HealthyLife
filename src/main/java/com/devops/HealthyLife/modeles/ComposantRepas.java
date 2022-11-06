@@ -1,4 +1,4 @@
-package com.devops.HealthyLife.modeles;
+ package com.devops.HealthyLife.modeles;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,8 +37,12 @@ public  class ComposantRepas {
 		return res.getInt("calories");
 	}
 	
+	public void setCalories(int calories) {
+		this.calories = calories;
+	}
 	
-	public void rajouter_composant(String nom, int calories) throws SQLException {
+	
+	public void rajouter_composant() throws SQLException {
 		BDController.executeStatement(String.format("INSERT INTO %s(nom,calories) VALUES('%s',%d);",className,nom,calories));
 	}
 	
@@ -49,5 +53,15 @@ public  class ComposantRepas {
 		return res.getInt("id");
 
 	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
+	
 	
 }

@@ -1,0 +1,107 @@
+create table users(
+	id INTEGER IDENTITY PRIMARY KEY,
+	nom varchar(40),
+	prenom varchar(40),
+	date_de_naisseance DATE,
+	email varchar(255),
+	ville varchar(255)
+	)
+
+create table entree(
+	id INTEGER IDENTITY PRIMARY KEY,
+	nom varchar(255),
+	calories int
+	)
+
+create table plat(
+	id INTEGER IDENTITY PRIMARY KEY,
+	nom varchar(255),
+	calories int
+	)
+
+create table dessert(
+	id INTEGER IDENTITY PRIMARY KEY,
+	nom varchar(255),
+	calories int
+	)
+
+create table collation(
+	id INTEGER IDENTITY PRIMARY KEY,
+	nom varchar(255),
+	calories int
+	)
+
+
+create table sport(
+	id INTEGER IDENTITY PRIMARY KEY,
+	nom_sport varchar(255),
+	calories_brulees int
+	)
+
+create table aliment_possedees(
+	id INTEGER IDENTITY PRIMARY KEY,
+	quantite int,
+	nom_aliment varchar(255),
+	calories_au_100g varchar(255)
+	id_user int,
+	foreign key (id_user) references users(id)
+	)
+
+create table repas(
+	id INTEGER IDENTITY PRIMARY KEY,
+	nom_repas varchar(255),
+	calories int,
+	id_entree int,
+	id_plat int,
+	id_dessert int,
+	foreign key (id_entree) references entree(id),
+	foreign key (id_plat) references plat(id),
+	foreign key (id_dessert) references dessert(id)
+	)
+
+create table recette(
+	id INTEGER IDENTITY PRIMARY KEY,
+	nom_recette varchar(255),
+	id_repas int,
+	foreign key (id_repas) references repas(id)
+	)
+
+
+create table agenda_repas(
+	id INTEGER IDENTITY PRIMARY KEY,
+	id_user int,
+	id_repas int,
+	date_repas date,
+	heure_repas time,
+	foreign key (id_user) references users(id),
+	foreign key (id_repas) references repas(id)
+	)
+
+create table agenda_sport(
+	id INTEGER IDENTITY PRIMARY KEY,
+	id_user int,
+	id_sport int,
+	date_sport date,
+	heure_sport time,
+	foreign key (id_user) references users(id),
+	foreign key (id_sport) references sport(id)
+	)
+
+
+insert into users values (1,'Abdelqader','Fadi','2001-05-03','a@gmail.com','Argenteuil');
+insert into collation values (1,'banane',200);
+insert into dessert values (1,'yaourt au fraises',80);
+insert into entree values (1,'salade',10);
+insert into plat values ( 1,'riz steak',500);
+insert into repas values (1,'midi',600,1,1,1);
+insert into sport values (1,'tennis',350);
+insert into recette values (1,'quiche lorraine',1);
+insert into agenda_repas values (1,1,1,'2022-10-30','20:00:00');
+insert into agenda_sport values (1,1,1,'2022-10-31','15:00:00');
+	
+
+
+
+
+	
+	

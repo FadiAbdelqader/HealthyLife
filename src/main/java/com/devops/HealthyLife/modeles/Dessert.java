@@ -9,4 +9,5 @@ public class Dessert extends ComposantRepas {
 	public Dessert() {
 		super();
 	}
+
 }
