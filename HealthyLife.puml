@@ -1,22 +1,61 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-
+package AgendaRepas{
 class Repas {
-Date date
-Time heure
-String nomRepas
-lister_entrees()
-lister_plats()
-lister_desserts()
-lister_collations()
-calcul_calories()
-ajouter_repas_agenda()
-enlever_repas_agenda()
++String date
++String heure
++Collation collation
++Entree entree
++Dessert dessert
++Plat plat
++this()
++this(Entree : e, Plat : p, Dessert : d; String : date; String : nom)
++lister_repas() : ArrayList<String>
++lister_collations() : ArrayList<String>
++setRepas()
++setCollation()
++getCaloriesRepas() : int
 }
-class Date {
+
+class Agenda {
 }
-class Heure {
+
+class Plat {
 }
+
+class Collation{
+}
+
+class Entree {
+}
+
+class Dessert {
+}
+
+class ComposantRepas{
+#int calories
+#String nom
+-String className
++this()
++this(String : nom)
++lister_composants() : ArrayList<String>
++getCalories() : int
++rajouter_composant()
++getID() : int
+}
+
+class PagesController {
+}
+
+class BDController {
+}
+
+ComposantRepas <|-- Plat
+ComposantRepas <|-- Collation
+ComposantRepas <|-- Dessert
+ComposantRepas <|-- Entree
+}
+
 
 class SeanceSport {
 String sport
