@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 buildscript {
     dependencies {
         classpath 'org.apache.maven:maven-core:3.8.6'
@@ -17,6 +18,13 @@ buildscript {
         // you can also use this for your local cache:
         // mavenLocal()
     }
+=======
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java'
+	id 'jacoco'
+>>>>>>> agenda
 }
 
 plugins {
@@ -62,6 +70,7 @@ dependencies {
     asciidoctorGems 'rubygems:rouge:3.15.0'
 }
 
+<<<<<<< HEAD
 repositories {
     // jcenter() // deprecated
     ruby.gems()
@@ -192,3 +201,8 @@ task asciidoctor(dependsOn: asciidoctorPdf)
 //     ignoredClasses = [
 //     ]
 // }
+=======
+tasks.named('test') {
+	useJUnitPlatform()
+}
+>>>>>>> agenda
